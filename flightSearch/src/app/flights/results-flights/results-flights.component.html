@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div >
+<header class="header">
+    <div class="back-arrow">
+        <a>
+            <i class="fa fa-long-arrow-left"></i> Wróć do wyszukiwania
+        </a>
+    </div>
+    <div class="logo">
+        <img src="../../../assets/logo.svg" alt="LOT">
+    </div>
+</header> 
+
+<div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+    <div class="window-info">
+
+    <div *ngIf="formData" class="search-data-container">
+        <div class="data-item">
+        <div class="city-container">
+        <span class="city"> {{ formData.from }}</span>
+        <span class="airplane-icon"><i class="fas fa-plane"></i></span>
+
+        <span class="city">{{ formData.to }}</span>
+        </div>
+      
+      <div class="sub-info">
+        <div class="date-adults">
+            <span class="data-style"> {{ formData.departureDate }}</span>
+            <span class="separator"> &middot; </span> <!-- Kropka jako separator -->
+            <span class="passenger"><i class="fas fa-user"></i> {{ formData.adults }}</span>
+
+    </div>
+    </div>
+      </div>
+    </div>
+</div>
+</div>
+
+
+<div *ngIf="formData" class="content">
+    <div class="left-content">
+        <h1>Wyloty w dniu: {{ formData.departureDate  | date:'dd.MM' }}</h1>
+        <span class="city" style="margin-right: 10px;"> {{ formData.from }}</span>
+        <span class="city">{{ formData.to }}</span>
+        
+    </div>
+    <div class="right-content">
+        <h1>Przyloty w dniu: 28 kwietnia </h1>
+        
+        <p>skąd dokąd</p>
+        
+       
+        
+    </div>
+</div>
+</div>

@@ -1,0 +1,62 @@
+
+ 
+      <div class="background-image" *ngIf="showSearchComponent">
+       
+    <div class="slogan-container">
+        <h1>LOT: Wherever You Want to Go.</h1>
+    </div>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="flight-type-wrapper">
+            <input type="radio" name="oneWay" id="oneWayTrue" class="oneWay" formControlName="oneWay" value="true" checked>
+            <input type="radio" name="oneWay" id="oneWayFalse" class="oneWay" formControlName="oneWay" value="false">
+            
+            <label for="oneWayTrue" class="flight-type-option option-oneWay">
+                <span>One Way</span>
+            </label>
+        
+            <label for="oneWayFalse" class="flight-type-option option-twoWays">
+                <span>Two way</span>
+            </label>
+        </div>
+        <div class="form-group-inline">
+            <div class="input-container">
+                <label>
+                    Destination:
+                    <input type="text" formControlName="from" />
+                </label>
+            </div>
+            <div class="input-container">
+                <label>
+                    Arrival:
+                    <input type="text" formControlName="to" />
+                </label>
+            </div>
+            <div class="input-container">
+                <label>
+                    Data wylotu:
+                    <input type="date" formControlName="departureDate" />
+                </label>
+            </div>
+            <div class="input-container" *ngIf="searchForm.get('oneWay')?.value === 'false'">
+                <label>
+                    Data powrotu:
+                    <input type="date" formControlName="returnDate" />
+                </label>
+            </div>
+            <div class="input-container">
+                <label>
+                    Ilość osób:
+                    <input type="number" formControlName="adults" />
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="button-18">Let's fly!</button>
+    </form>
+
+</div>
+<div>
+    <app-results-flights *ngIf="!showSearchComponent" [formData]="formData"></app-results-flights>
+
+<app-air-connection *ngIf="!showSearchComponent" [searchResults]="searchResultsData"></app-air-connection>
+
+</div>

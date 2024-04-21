@@ -1,0 +1,125 @@
+ <!-- <div class="flight-card-test">
+  <div *ngIf="flightData.length > 0">
+    <h2>Wyniki wyszukiwania lotów</h2>
+    <ul>
+      <li *ngFor="let flight of flightData">
+        <h3>Lot {{ flight.id }}</h3>
+        
+        <ul>
+          <li *ngFor="let itinerary of flight.itineraries">
+            <p><strong>Czas trwania:</strong> {{ itinerary.duration }}</p>
+            
+            <ul>
+              <li *ngFor="let segment of itinerary.segments">
+                <p><strong>Wylot z:</strong> {{ segment.departure.iataCode }} o {{ segment.departure.at }}</p>
+                 tutaj możesz dodać więcej informacji o segmencie, jeśli chcesz 
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul> 
+  </div>
+
+   <span class="city">{{ flightData.numberOfBookableSeats }}</span> 
+     <div class="flight-info">
+      <div class="outbound-flight">
+        <div class="flight-airport flight-info flight-airport-outbound">
+          <p class="flight-info-upper">
+            <span class="bold">{{ departureAirportCode }}</span>
+            {{ departureTime }}
+          </p>
+          <p>{{ departureAirportName }}</p>
+        </div>
+  
+        <div class="flight-travel flight-info">
+          <p class="flight-info-upper">{{ duration }}</p>
+          
+          <div class="stop-wrapper"><span >{{ stops }}</span></div>
+          
+          <svg class="icon-way" viewBox="0 0 341 32">
+             SVG Path 
+          </svg>
+          
+          <p>{{ durationLabel }}</p>
+        </div>
+  
+        <div class="flight-airport flight-info flight-airport-inbound">
+          <p class="flight-airport-upper">
+            {{ arrivalTime }}
+            <span class="bold">{{ arrivalAirportCode }}</span>
+          </p>
+          <p>{{ arrivalAirportName }}</p>
+        </div>
+  
+        <div class="flight-airline flight-info">
+          <p class="flight-airline-upper">
+            <span></span> <span class="">{{ airlineName }}</span>
+          </p>
+          <p>
+           <svg class="check-icon-bags" viewBox="0 0 38 32">
+              SVG Path 
+            </svg> 
+           <span class="">{{ baggageInfo }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flight-price flight-info">
+      <p class="price-label">{{ priceLabel }}<br/>
+        <span class="price-label-grey">{{ priceLabelGrey }}</span>
+      </p>
+      <span class="flight-price-total">{{ price }}</span>
+      
+    </div>  -->
+
+
+
+
+     
+    <div *ngIf="searchResults">
+      <div *ngFor="let flight of searchResults.flightData" class="card">
+        <div class="card-content">
+    
+          <!-- Informacje o locie: skąd, dokąd, godziny -->
+          <div class="flight-info">
+            <div class="flight-info-left">
+              <div class="card-title">{{ flight.overallRoute.from }}  -> {{ flight.overallRoute.to }} </div>
+              <p>{{ flight.departureTime | date:'HH:mm' }}</p>
+          <p>{{ flight.arrivalTime | date:'HH:mm' }}</p>
+              <span *ngIf="flight.hasStopover">Przesiadka: {{ flight.stopoverLocation }}</span>
+            </div>
+            
+            <!-- Cena lotu -->
+            <div class="flight-info-right">
+              <p>Cena: {{ flight.price }} EUR</p>
+            </div>
+          </div>
+    
+          <!-- Czas trwania i trasa lotu -->
+          <div class="flight-details">
+            <p>Czas trwania: {{ flight.duration }}</p>
+            
+            <h4>Trasa lotu:</h4>
+            <ul>
+              <li *ngFor="let route of flight.fullRoute">
+                {{ route.from }} -> {{ route.to }} ({{ route.duration }})
+                <span *ngIf="route.stopover"> - Przesiadka w {{ route.stopover }}</span>
+              </li>
+            </ul>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="!searchResults" class="card">
+      <div class="card-title">Brak wyników wyszukiwania</div>
+    </div> 
+    
+      
+
+
+
+    

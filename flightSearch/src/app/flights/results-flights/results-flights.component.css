@@ -1,0 +1,124 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px; /* dostosuj padding według potrzeb */
+    background-image: url('../../../assets/header.png'); /* kolor tła dla headera */
+    color: #ffffff; /* kolor tekstu */
+    background-position: center;
+    /* box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);; */
+  }
+  
+  .back-arrow a {
+    color: #252668;       /* Kolor tekstu */
+    text-decoration: none; /* Usunięcie podkreślenia linku */
+    font-size: 15px;      /* Rozmiar czcionki */
+}
+
+.back-arrow i {
+    font-size: 24px;      /* Rozmiar ikony */
+    margin-right: 10px;   /* Odległość między ikoną a tekstem */
+}
+  
+  .fa-long-arrow-left {
+    color: #252668;
+    
+}
+
+  .logo img {
+    max-width: 200px; /* maksymalna szerokość logo */
+    height: auto; /* zachowanie proporcji */
+  }
+
+  h1{
+    font-size: 1.6rem;
+    color: #252668;
+    font-weight: bold;
+    margin-top: 5%;
+    
+  }
+
+  p{
+    font-size: 1rem;
+    color: #252668;
+    font-weight: normal;
+    
+  }
+
+  .content {
+    display: flex;
+}
+
+.left-content,
+.right-content {
+    flex: 1;
+    padding: 20px ; 
+    text-align: center; 
+}
+
+
+.window-info {
+  width: 100vw;
+  height: auto;
+  background-color: white;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.search-data-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(50% - 5px);
+  margin-right: 10px;
+}
+
+.data-item:last-child {
+  margin-right: 0;
+}
+
+.city-container {
+  display: flex;
+  align-items: center;
+}
+
+.airplane-icon {
+  margin: 0 10px;
+  color: #ff8c00;
+}
+
+.city {
+  color: #252668;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sub-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.date-adults {
+  display: flex; /* Ustawienie obok siebie */
+  align-items: center;
+}
+
+.separator {
+  margin: 0 20px; /* Margines wokół kropki */
+  color:#ff8c00;
+ 
+}
+
+.data-style, .passenger {
+  color: #9d9d9d;
+  font-size: 15px;
+}

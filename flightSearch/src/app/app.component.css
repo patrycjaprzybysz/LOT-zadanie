@@ -1,0 +1,9 @@
+
+
+
+
+@media (max-width: 768px) { /* dostosowanie dla mniejszych ekranów */
+    .slogan-container {
+        left: 10px;
+    }
+}

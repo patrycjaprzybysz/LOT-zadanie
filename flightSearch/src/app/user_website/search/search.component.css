@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+
+.background-image {
+  /* Twoje style dla tła */
+  background-image: url('../../../assets/1920x1080-pl.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-position: center center;
+  position: relative;
+  display: flex;
+  
+}
+
+.slogan-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  top: 50%;
+  left: 6%; /* blizej lewej strony */
+  transform: translateY(-80%); /* wycentrowanie w pionie */
+ 
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0; /* usunięcie marginesów */
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+form {
+  width: 90vw;
+  margin: auto;
+  margin-top: 60vh; /* połowa wysokości ekranu */
+  transform: translateY(-10%); /* przesunięcie do góry o połowę wysokości formularza */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  /* pozostałe style */
+}
+
+
+/* Grupy pól formularza */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: visible;
+}
+
+.passenger-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.passenger-details {
+    position: absolute;
+    bottom: 8%;
+    left: 80%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 440px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 15px; 
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.passenger-details.active {
+    display: block;
+}
+
+.input-container {
+    flex: 1;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    min-width: 150px;
+}
+
+.input-container2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.input-container2 label {
+    color: #252668;
+    font-weight: bold;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.input-container2 .info {
+    color: #524e4e;
+    font-size: 12px;
+    margin-top: 2px; /* Dodany margines na górę */
+    
+}
+
+.input-container2 .input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-container2 .input-group button {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+.input-container2 .input-group input {
+    width: 64px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-left: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #252668;
+    font-weight: bold;
+    font-size: small;
+}
+
+/* Input style */
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+input[type="number"]::placeholder {
+    color: #818298;
+}
+
+input[type="text"]:not(:placeholder-shown),
+input[type="date"]:not(:placeholder-shown),
+input[type="number"]:not(:placeholder-shown) + label {
+    color: #252668;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Specyficzne style dla wyboru lotu */
+.flight-type-wrapper {
+  display: inline-flex;
+  background: #fff;
+  height: 50px;
+  width: 260px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  margin-bottom: 18px;
+}
+
+.flight-type-option {
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+input[type="radio"].oneWay {
+  display: none;
+}
+
+#oneWayTrue:checked ~ .option-oneWay,
+#oneWayFalse:checked ~ .option-twoWays {
+  border-color: #252668;
+  background: #252668;
+}
+
+#oneWayTrue:checked ~ .option-oneWay span,
+#oneWayFalse:checked ~ .option-twoWays span {
+  color: #fff;
+}
+
+.flight-type-option span {
+  font-size: 12px;
+  color: #ccc;
+}
+
+/* Dodane style */
+.input-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+
+
+.button-18 {
+  align-items: center;
+  background-color: #252668;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus { 
+  background-color: #393c92;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.button-18:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.custom-input-number {
+    font-size: 18px;
+    width: 64px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #252668;
+    border-radius: 20px;
+    margin: 0 8px;
+  }
+/* Styl przycisków w kształcie kółka */
+.custom-button-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background-color: #252668;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0 8px;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-button-circle:hover {
+    background-color: #38396a;
+  }
+  
+  .custom-button-circle:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .custom-button-circle:active {
+    background-color: #0056b3;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #252668;
+}
+
+.subtitle {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #818298;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #252668;
+    z-index: 1; /* aby przycisk był na wierzchu */
+}
+
+.close-button:hover {
+    color: #38396a;
+}
+
+.passenger-details-form {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
