@@ -1,8 +1,9 @@
-export default async() => {
 const express = require('express');
 const Amadeus = require('amadeus');
 const morgan = require('morgan');
 const cors = require('cors');
+
+export default async() => {
 
 const app = express();
 const port = 3000;
