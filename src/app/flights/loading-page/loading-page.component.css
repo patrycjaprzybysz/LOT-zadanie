@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-image:url('../../../assets/1920x1200-pl (4).png');
+  }
+  
+  .loader {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .loader span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: rotate(calc(18deg * var(--i)));
+  }
+  
+  .loader span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: animate 2s linear infinite;
+    animation-delay: calc(0.1s * var(--i));
+  }
+  
+  @keyframes animate {
+    0% {
+        transform: scale(0);
+    }
+    
+    10% {
+        transform: scale(1.2);
+    }
+    
+    80%, 100% {
+        transform: scale(0);
+    }
+  }
+  
+  .rocket {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    animation: rotating 2s linear infinite;
+    animation-delay: -1s;
+  }
+  
+  @keyframes rotating {
+    0% {
+        transform: rotate(10deg);
+    }
+    
+    100% {
+        transform: rotate(370deg);
+    }
+  }
+  
+  .rocket::before {
+    content: "\f072"; /* Replaced with the Font Awesome airplane icon */
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    top: 80px;
+    left: 85px;
+    color: #fff;
+    font-size: 50px;
+    transform: rotate(90deg);
+  }
+  

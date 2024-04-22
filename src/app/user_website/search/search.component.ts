@@ -15,7 +15,7 @@ export class SearchComponent {
   searchForm: FormGroup;
   searchResultsData: any = null;
   formData: any = null;
-  
+  isLoading: boolean = false;
   searchError: string = '';
   showSearchComponent: boolean = true;
   isOneWay: boolean = true;
@@ -61,6 +61,8 @@ export class SearchComponent {
       this.showTwoWays = true;
   }
 
+     
+
     const departureDate = this.searchForm.get('departureDate')?.value;
   const returnDate = this.searchForm.get('returnDate')?.value;
 
@@ -88,7 +90,9 @@ export class SearchComponent {
     alert('Do you wanna go or not? Please add passengers ;)');
     return;
   }
+   
 
+  this.isLoading = true;
 
     if (this.searchForm.valid) {
       const formData = this.searchForm.value;
@@ -104,6 +108,7 @@ export class SearchComponent {
           this.searchResultsData = data;
           this.searchError = ''; // Wyczyszczenie błędu po udanym pobraniu danych
           this.formData = formData;
+          this.isLoading = false;
         },
         error => {
           console.error('Błąd podczas wyszukiwania lotów:', error);
