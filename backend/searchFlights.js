@@ -154,7 +154,7 @@ exports.handler = async (event) => {
         destinationLocationCode: toAirport,
         departureDate: date,
         adults: adults,
-        max:20,
+        max:40,
       });
 
       let response2;
@@ -165,7 +165,7 @@ exports.handler = async (event) => {
           destinationLocationCode: fromAirport,
           departureDate: returnDate,
           adults: adults,
-          max:20,
+          max:40,
         });
       }
 
