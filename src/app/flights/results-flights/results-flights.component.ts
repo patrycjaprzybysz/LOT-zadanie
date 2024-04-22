@@ -26,6 +26,7 @@ export class ResultsFlightsComponent {
   ngOnChanges(): void {
     console.log(this.formData);
   }
+  
 
   formatCityName(city: string): string {
     return city.toLowerCase().replace(/\b\w/g, (letter) => {
