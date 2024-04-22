@@ -1,23 +1,17 @@
-const express = require('express');
 const Amadeus = require('amadeus');
 const morgan = require('morgan');
 const cors = require('cors');
 
-export default async() => {
-
-const app = express();
-const port = 3000;
-
 const amadeus = new Amadeus({
   clientId: 'Ey2oSYNJmpgtD5q8JKJiItIJ8lkrcmH2',
   clientSecret: 'iAzEFe9LwMAlblCe',
-  
 });
 
-app.use(morgan('dev'));
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Initialize middleware
+const morganMiddleware = morgan('dev');
+const corsMiddleware = cors();
+const jsonMiddleware = require('body-parser').json();
+const urlEncodedMiddleware = require('body-parser').urlencoded({ extended: true });
 
 function formatFlightData(response) {
   const formattedData = response.data.map(flight => {
@@ -61,7 +55,6 @@ function formatFlightData(response) {
   return formattedData;
 }
 
-// Mapa miast do skrótów lotnisk
 const cityToAirport = {
   'New York': 'JFK',
   'Los Angeles': 'LAX',
@@ -135,90 +128,87 @@ const cityToAirport = {
   
 };
 
-app.get('/', (req, res) => {
-  res.send('Serwer działa');
-});
+exports.handler = async (event) => {
+  const { httpMethod, queryStringParameters, body } = event;
 
-
-app.get('/searchFlights', async (req, res) => {
-  const searchData = req.query;
-
-  const fromAirport = cityToAirport[searchData.originLocationCode];
-  const toAirport = cityToAirport[searchData.destinationLocationCode];
-  const date = searchData.departureDate;
-  const returnDate= searchData.returnDate;
-  const adults = searchData.adults;
-
-  console.log("searchdata",searchData)
-  // Prosta walidacja zapytania
-  if (!fromAirport || !toAirport || !date || !adults) {
-    console.log(fromAirport, toAirport, date, adults);
-    return res.status(400).json({ message: 'Brak wymaganych parametrów' });
-  }
-
-  try {
-    console.log('Wysyłane zapytanie do Amadeus:', {
-      originLocationCode: fromAirport,
-      destinationLocationCode: toAirport,
-      departureDate: searchData.departureDate,
-      adults: searchData.adults
-    });
-    
-    const response = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: fromAirport,
-      destinationLocationCode: toAirport,
-      departureDate: searchData.departureDate,
-      adults: searchData.adults
-    });
-    
-let response2;
-
-    if(searchData.returnDate !== ''){
-      console.log("SENDING SECOND REQUEST");
-      response2 = await amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: toAirport,
-      destinationLocationCode: fromAirport,
-      departureDate: searchData.returnDate,
-      adults: searchData.adults
-    });
-  }
-    //console.log('Odpowiedź z Amadeus:', response.data);
-    console.log('Otrzymane dane:', searchData);
-
-    // Sprawdzenie, czy odpowiedź jest poprawna
-    if (!response.data || !Array.isArray(response.data)) {
-      throw new Error('Nieprawidłowa odpowiedź z Amadeus API');
-    }
-
-    const formattedData = formatFlightData(response);
-
-    let formattedData2;
-    if(searchData.returnDate !== ''){
-      formattedData2 = formatFlightData(response2);
-    }
-
-
-    const responseData = {
-      pure: response.data,
-      flightData: formattedData,
-      searchData: searchData,
-      flightDara2: formattedData2
+  if (httpMethod === 'GET' && event.path === '/') {
+    return {
+      statusCode: 200,
+      body: 'Serwer działa',
     };
-
-    if(searchData.returnDate !== ''){
-      responseData.pure2 = response2.data;
-    }
-    
-
-    res.json(responseData);
-   
-
-  } catch (error) {
-    console.error('Błąd podczas przetwarzania zapytania do Amadeus:', error);
-    res.status(500).json({ message: 'Wystąpił błąd podczas wyszukiwania lotów',errorMes: error });
   }
-});
 
-app.listen(port, () => {
-  console.log(`Serwer działa na http://localhost:${port}`);
-});}
+  if (httpMethod === 'GET' && event.path === '/searchFlights') {
+    const searchData = queryStringParameters;
+
+    const fromAirport = cityToAirport[searchData.originLocationCode];
+    const toAirport = cityToAirport[searchData.destinationLocationCode];
+    const date = searchData.departureDate;
+    const returnDate = searchData.returnDate;
+    const adults = searchData.adults;
+
+    if (!fromAirport || !toAirport || !date || !adults) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ message: 'Brak wymaganych parametrów' }),
+      };
+    }
+
+    try {
+      const response = await amadeus.shopping.flightOffersSearch.get({
+        originLocationCode: fromAirport,
+        destinationLocationCode: toAirport,
+        departureDate: date,
+        adults: adults,
+      });
+
+      let response2;
+
+      if (returnDate !== '') {
+        response2 = await amadeus.shopping.flightOffersSearch.get({
+          originLocationCode: toAirport,
+          destinationLocationCode: fromAirport,
+          departureDate: returnDate,
+          adults: adults,
+        });
+      }
+
+      if (!response.data || !Array.isArray(response.data)) {
+        throw new Error('Nieprawidłowa odpowiedź z Amadeus API');
+      }
+
+      const formattedData = formatFlightData(response);
+      let formattedData2;
+
+      if (returnDate !== '') {
+        formattedData2 = formatFlightData(response2);
+      }
+
+      const responseData = {
+        pure: response.data,
+        flightData: formattedData,
+        searchData: searchData,
+        flightData2: formattedData2,
+      };
+
+      if (returnDate !== '') {
+        responseData.pure2 = response2.data;
+      }
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify(responseData),
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Wystąpił błąd podczas wyszukiwania lotów', errorMes: error.message }),
+      };
+    }
+  }
+
+  return {
+    statusCode: 404,
+    body: 'Not Found',
+  };
+};
