@@ -1,8 +1,8 @@
 # Wyszukiwarka lotów
 
-Projekt rekrutacyjny polegający na stworzeniu zaawansowanej wyszukiwarki lotów. Wykorzystałem najnowszą wersję frameworka Angular (Angular 17), aby zapewnić interaktywny i responsywny interfejs użytkownika. Aby dostarczyć aktualne i dokładne informacje o lotach, zintegrowałem się z Amadeus API, które umożliwia wyszukiwanie połączeń lotniczych.
+Projekt rekrutacyjny polegający na stworzeniu wyszukiwarki lotów. Wykorzystałam najnowszą wersję frameworka Angular (Angular 17), aby zapewnić interaktywny i responsywny interfejs użytkownika. Aby dostarczyć aktualne i dokładne informacje o lotach, zintegrowałam się z Amadeus API, które umożliwia wyszukiwanie połączeń lotniczych.
 
-Dodatkowo, w celu efektywnego przetwarzania zapytań i optymalizacji wydajności, wykorzystałem backend oparty na technologii Node.js. Dzięki temu zapewniłem płynność działania aplikacji oraz szybkie odpowiedzi na zapytania użytkowników. 
+Dodatkowo, w celu efektywnego przetwarzania zapytań i optymalizacji wydajności, wykorzystałam backend oparty na technologii Node.js. Dzięki temu zapewniłam płynność działania aplikacji oraz szybkie odpowiedzi na zapytania użytkowników. 
 
 link do strony: `https://lot-task.netlify.app/`
 
