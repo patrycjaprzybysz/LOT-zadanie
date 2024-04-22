@@ -67,8 +67,7 @@ showTwoWays: boolean = false;
       const formData = this.searchForm.value;
 
      
-      const backendUrl = 'https://lot-task.netlify/functions'; // adres URL twojego backendu
-      const apiUrl = `https://test.api.amadeus.com/v2/shopping/flight-offers`;
+      const backendUrl = 'https://lot-task.netlify.app/.netlify/functions'; // adres URL
 
       const fullUrl = `${backendUrl}/searchFlights?originLocationCode=${formData.from}&destinationLocationCode=${formData.to}&departureDate=${formData.departureDate}&adults=${formData.adults}&returnDate=${formData.returnDate}`;
 
