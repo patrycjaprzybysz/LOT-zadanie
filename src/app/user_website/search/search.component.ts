@@ -69,7 +69,7 @@ export class SearchComponent {
     return; 
   }
 
-  let regex = /^[a-zA-Z]+$/
+  let regex = /^[a-zA-Z\s]+/
 
   if (!regex.test(this.searchForm.get('from')?.value) ) {
     alert('Departure city is not valid');
