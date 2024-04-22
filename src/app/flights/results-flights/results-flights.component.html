@@ -18,10 +18,10 @@
     <div *ngIf="formData" class="search-data-container">
         <div class="data-item">
         <div class="city-container">
-        <span class="city"> {{ formData.from }}</span>
+        <span class="city"> {{ formatCityName(formData.from)}}</span>
         <span class="airplane-icon"><i class="fas fa-plane"></i></span>
 
-        <span class="city">{{ formData.to }}</span>
+        <span class="city">{{formatCityName(formData.to) }}</span>
         </div>
       
       <div class="sub-info">

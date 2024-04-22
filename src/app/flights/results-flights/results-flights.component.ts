@@ -1,12 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+
+
+
+
 @Component({
   selector: 'app-results-flights',
   templateUrl: './results-flights.component.html',
   styleUrl: './results-flights.component.css'
 })
+
+
+
 export class ResultsFlightsComponent {
+
+
 
   @Input() formData: any = null;
   
@@ -17,4 +26,11 @@ export class ResultsFlightsComponent {
   ngOnChanges(): void {
     console.log(this.formData);
   }
+
+  formatCityName(city: string): string {
+    return city.toLowerCase().replace(/\b\w/g, (letter) => {
+        return letter.toUpperCase();
+    });
+  }
+
 }
