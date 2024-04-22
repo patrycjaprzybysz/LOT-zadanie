@@ -2,22 +2,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 30px; /* dostosuj padding według potrzeb */
-    background-image: url('../../../assets/header.png'); /* kolor tła dla headera */
-    color: #ffffff; /* kolor tekstu */
+    padding: 25px 30px; 
+    background-image: url('../../../assets/header.png');
+    color: #ffffff; 
     background-position: center;
-    /* box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);; */
+   
   }
   
   .back-arrow a {
-    color: #252668;       /* Kolor tekstu */
-    text-decoration: none; /* Usunięcie podkreślenia linku */
-    font-size: 15px;      /* Rozmiar czcionki */
+    color: #252668;       
+    text-decoration: none; 
+    font-size: 15px;      
 }
 
 .back-arrow i {
-    font-size: 24px;      /* Rozmiar ikony */
-    margin-right: 10px;   /* Odległość między ikoną a tekstem */
+    font-size: 24px;     
+    margin-right: 10px;   
 }
   
   .fa-long-arrow-left {
@@ -26,8 +26,8 @@
 }
 
   .logo img {
-    max-width: 200px; /* maksymalna szerokość logo */
-    height: auto; /* zachowanie proporcji */
+    max-width: 200px; 
+    height: auto; 
   }
 
   h1{
@@ -108,12 +108,12 @@
 }
 
 .date-adults {
-  display: flex; /* Ustawienie obok siebie */
+  display: flex; 
   align-items: center;
 }
 
 .separator {
-  margin: 0 20px; /* Margines wokół kropki */
+  margin: 0 20px; 
   color:#ff8c00;
  
 }

@@ -8,7 +8,7 @@ import { SearchComponent } from './user_website/search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ResultsFlightsComponent } from './flights/results-flights/results-flights.component';
-import { LoadingPageComponent } from './loading-page/loading-page/loading-page.component';
+
 
 import { AirConnectionComponent } from './flights/air-connection/air-connection.component';
 
@@ -20,7 +20,6 @@ import { AirConnectionComponent } from './flights/air-connection/air-connection.
     AppComponent,
     SearchComponent,
     ResultsFlightsComponent,
-    LoadingPageComponent,
     AirConnectionComponent,
    
     

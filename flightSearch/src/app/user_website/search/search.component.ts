@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -23,18 +23,31 @@ export class SearchComponent {
     }
     return '';
   }
+
+
+  
+  
   
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.searchForm = this.fb.group({
+      oneWay: ['true'],
       from: ['', Validators.required],
       to: ['', Validators.required],
       departureDate: ['', Validators.required],
-      adults: ['', [Validators.required, Validators.min(1)]]
+      returnDate: [''],
+      adults: ['', [Validators.required, Validators.min(1), Validators.max(9)]]
     });
   }
   
   onSubmit() {
+    const departureDate = this.searchForm.get('departureDate')?.value;
+  const returnDate = this.searchForm.get('returnDate')?.value;
+
+  if (departureDate && returnDate && returnDate < departureDate) {
+    alert('Its a plane, not a time machine ;)');
+    return; // Zatrzymaj dalsze przetwarzanie formularza
+  }
     if (this.searchForm.valid) {
       const formData = this.searchForm.value;
 
@@ -56,7 +69,7 @@ export class SearchComponent {
           this.searchError = error.message || 'Nieznany błąd';
         }
       );
-
+      console.log(this.searchResultsData)
       this.showSearchComponent = false;
       this.searchForm.reset();
 

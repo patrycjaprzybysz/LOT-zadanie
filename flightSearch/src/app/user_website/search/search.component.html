@@ -21,36 +21,38 @@
         <div class="form-group-inline">
             <div class="input-container">
                 <label>
-                    Destination:
+                    From where:
                     <input type="text" formControlName="from" />
                 </label>
             </div>
             <div class="input-container">
                 <label>
-                    Arrival:
+                    Where:
                     <input type="text" formControlName="to" />
                 </label>
             </div>
             <div class="input-container">
                 <label>
-                    Data wylotu:
+                    Departure:
                     <input type="date" formControlName="departureDate" />
                 </label>
             </div>
             <div class="input-container" *ngIf="searchForm.get('oneWay')?.value === 'false'">
                 <label>
-                    Data powrotu:
+                    Return:
                     <input type="date" formControlName="returnDate" />
                 </label>
             </div>
             <div class="input-container">
                 <label>
-                    Ilość osób:
+                    Passengers:
                     <input type="number" formControlName="adults" />
                 </label>
             </div>
         </div>
-        <button type="submit" class="button-18">Let's fly!</button>
+ 
+
+        <button type="submit" class="button-18" (click)="onSubmit()">Let's fly!</button>
     </form>
 
 </div>

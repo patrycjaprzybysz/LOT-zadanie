@@ -17,6 +17,47 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+function formatFlightData(response) {
+  const formattedData = response.data.map(flight => {
+      const itinerary = flight.itineraries[0];
+      const segments = itinerary.segments;
+      const departureTime = segments[0].departure.at;
+      const arrivalTime = segments[segments.length - 1].arrival.at;
+      const duration = itinerary.duration;
+      const price = flight.price.total;
+
+      const fullRoute = segments.map((segment, index) => {
+          const stopover = index < segments.length - 1 ? segments[index + 1].departure.iataCode : null;
+          const stopoverTime = index < segments.length - 1 ? segments[index + 1].departure.at : null;
+          const stopoverArrivalTime = index < segments.length - 1 ? segments[index + 1].arrival.at : null;
+
+          return {
+              from: segment.departure.iataCode,
+              to: segment.arrival.iataCode,
+              duration: segment.duration,
+              stopover,
+              stopoverTime,
+              stopoverArrivalTime
+          };
+      });
+
+      const overallRoute = {
+          from: segments[0].departure.iataCode,
+          to: segments[segments.length - 1].arrival.iataCode
+      };
+
+      return {
+          departureTime,
+          arrivalTime,
+          duration,
+          price,
+          fullRoute,
+          overallRoute
+      };
+  });
+
+  return formattedData;
+}
 
 // Mapa miast do skrótów lotnisk
 const cityToAirport = {
@@ -183,14 +224,18 @@ app.get('/searchFlights', async (req, res) => {
       departureDate: searchData.departureDate,
       adults: searchData.adults
     });
+    
+let response2;
 
-    const response2 = await amadeus.shopping.flightOffersSearch.get({
+    if(searchData.returnDate !== ''){
+      console.log("SENDING SECOND REQUEST");
+      response2 = await amadeus.shopping.flightOffersSearch.get({
       originLocationCode: toAirport,
       destinationLocationCode: fromAirport,
       departureDate: searchData.returnDate,
       adults: searchData.adults
     });
-
+  }
     //console.log('Odpowiedź z Amadeus:', response.data);
     console.log('Otrzymane dane:', searchData);
 
@@ -199,61 +244,32 @@ app.get('/searchFlights', async (req, res) => {
       throw new Error('Nieprawidłowa odpowiedź z Amadeus API');
     }
 
-    const formattedData = response.data.map(flight => {
-      const itinerary = flight.itineraries[0];
-      const segments = itinerary.segments;
-      const departureTime = segments[0].departure.at;
-      const arrivalTime = segments[segments.length - 1].arrival.at;
-      const duration = itinerary.duration;
-      const price = flight.price.total;
-    
-      const fullRoute = segments.map((segment, index) => {
-        const stopover = index < segments.length - 1 ? segments[index + 1].departure.iataCode : null;
-        const stopoverTime = index < segments.length - 1 ? segments[index + 1].departure.at : null; // Godzina przesiadki
-    
-        // Godzina przylotu do miejsca przesiadki
-        const stopoverArrivalTime = index < segments.length - 1 ? segments[index + 1].arrival.at : null;
-    
-        return {
-          from: segment.departure.iataCode,
-          to: segment.arrival.iataCode,
-          duration: segment.duration,
-          stopover,
-          stopoverTime,
-          stopoverArrivalTime
-        };
-      });
-    
-      // Miejsce wylotu i miejsce docelowe dla całej trasy lotu
-      const overallRoute = {
-        from: segments[0].departure.iataCode,
-        to: segments[segments.length - 1].arrival.iataCode
-      };
-    
-      return {
-        departureTime,
-        arrivalTime,
-        duration,
-        price,
-        fullRoute,
-        overallRoute
-      };
-    });
-    
+    const formattedData = formatFlightData(response);
+
+    let formattedData2;
+    if(searchData.returnDate !== ''){
+      formattedData2 = formatFlightData(response2);
+    }
+
 
     const responseData = {
       pure: response.data,
       flightData: formattedData,
-      searchData: searchData
+      searchData: searchData,
+      flightDara2: formattedData2
     };
+
+    if(searchData.returnDate !== ''){
+      responseData.pure2 = response2.data;
+    }
     
 
     res.json(responseData);
    
 
   } catch (error) {
-    console.error('Błąd podczas przetwarzania zapytania do Amadeus:', error.stack);
-    res.status(500).json({ message: 'Wystąpił błąd podczas wyszukiwania lotów' });
+    console.error('Błąd podczas przetwarzania zapytania do Amadeus:', error);
+    res.status(500).json({ message: 'Wystąpił błąd podczas wyszukiwania lotów',errorMes: error });
   }
 });
 
