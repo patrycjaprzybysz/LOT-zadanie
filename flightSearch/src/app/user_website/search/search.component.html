@@ -57,8 +57,24 @@
 
 </div>
 <div>
-    <app-results-flights *ngIf="!showSearchComponent" [formData]="formData"></app-results-flights>
 
-<app-air-connection *ngIf="!showSearchComponent" [searchResults]="searchResultsData"></app-air-connection>
+    <app-results-flights *ngIf="!showSearchComponent && (showOneWay || showTwoWays)" [formData]="formData"></app-results-flights>
+
+    <div class="container">
+
+        <!-- Departure -->
+        <div *ngIf="(showTwoWays || showOneWay) && !showSearchComponent" class="departure">
+            <h2>Departure</h2>
+            <app-air-connection *ngIf="!showSearchComponent && (showOneWay || showTwoWays)" [searchResults]="searchResultsData"></app-air-connection>
+        </div>
+
+        <!-- Arrival -->
+         <div *ngIf="showTwoWays" class="arrival">
+            <h2>Arrival</h2>
+            <app-air-connection-return *ngIf="!showSearchComponent && showTwoWays" [searchResults2]="searchResultsData"></app-air-connection-return>
+        </div>
+
+    </div>
+
 
 </div>

@@ -37,21 +37,4 @@
 </div>
 </div>
 
-
-<div *ngIf="formData" class="content">
-    <div class="left-content">
-        <h1>Wyloty w dniu: {{ formData.departureDate  | date:'dd.MM' }}</h1>
-        <span class="city" style="margin-right: 10px;"> {{ formData.from }}</span>
-        <span class="city">{{ formData.to }}</span>
-        
-    </div>
-    <div class="right-content">
-        <h1>Przyloty w dniu: {{ formData.returnDate  | date:'dd.MM' }} </h1>
-        <span class="city" style="margin-right: 10px;"> {{ formData.to }}</span>
-        <span class="city">{{ formData.from }}</span>
-        
-       
-        
-    </div>
-</div>
 </div>

@@ -15,6 +15,12 @@ export class SearchComponent {
   
   searchError: string = '';
   showSearchComponent: boolean = true;
+  isOneWay: boolean = true;
+
+  showOneWay: boolean = true;
+showTwoWays: boolean = false;
+
+
 
   getStopoverTime(stopoverSegment: any): string {
     if (stopoverSegment && stopoverSegment.departure && stopoverSegment.departure.at) {
@@ -25,6 +31,7 @@ export class SearchComponent {
   }
 
 
+  
   
   
   
@@ -41,6 +48,14 @@ export class SearchComponent {
   }
   
   onSubmit() {
+    if (this.searchForm.get('oneWay')?.value === 'true') {
+      this.showOneWay = true;
+      this.showTwoWays = false;
+  } else {
+      this.showOneWay = false;
+      this.showTwoWays = true;
+  }
+
     const departureDate = this.searchForm.get('departureDate')?.value;
   const returnDate = this.searchForm.get('returnDate')?.value;
 
@@ -61,7 +76,7 @@ export class SearchComponent {
         data => {
           console.log(data);
           this.searchResultsData = data;
-          this.searchError = ''; // Wyczyść błąd po pomyślnym pobraniu danych
+          this.searchError = ''; // Wyczyszczenie błędu po udanym pobraniu danych
           this.formData = formData;
         },
         error => {

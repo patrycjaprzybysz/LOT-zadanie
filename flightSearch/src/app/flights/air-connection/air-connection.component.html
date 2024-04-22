@@ -1,5 +1,5 @@
 
-     
+
     <div *ngIf="searchResults">
       <div *ngFor="let flight of searchResults.flightData" class="card">
         <div class="card-content">
@@ -7,44 +7,64 @@
           <!-- Informacje o locie: skąd, dokąd, godziny -->
           <div class="flight-info">
             <div class="flight-info-left">
-              <div class="card-title">{{ flight.overallRoute.from }}  -> {{ flight.overallRoute.to }} </div>
-              <p>{{ flight.departureTime | date:'HH:mm' }}</p>
-          <p>{{ flight.arrivalTime | date:'HH:mm' }}</p>
-              <span *ngIf="flight.hasStopover">Przesiadka: {{ flight.stopoverLocation }}</span>
+              <div class="flight-time">
+                <span class="card-title">{{ flight.overallRoute.from }}</span>
+                <div class="time">
+                  {{ flight.departureTime | date:'HH:mm' }} 
+                  <span class="airplane-icon"><i class="fas fa-plane"></i></span>
+                  {{ flight.arrivalTime | date:'HH:mm' }}
+                </div>
+                <span class="card-title2">{{ flight.overallRoute.to }}</span>
+                
+              </div>
+      
             </div>
-            
-            <!-- Cena lotu -->
-            <div class="flight-info-right">
-              <p>Cena: {{ flight.price }} EUR</p>
+
+
+            <!-- cena lotu czas lotu -->
+            <div class="flight-info-center">
+              <p style="font-size: 10px; color: #252668;">{{ formatDuration(flight.duration) }}</p>
+              
+              <p style="font-size: 15px; color: #252668;">{{ flight.price }} EUR</p>
+              <p style="font-size: 8px; color: #252668;">per person</p>
             </div>
-          </div>
     
-          <!-- Czas trwania i trasa lotu -->
-          <div class="flight-details">
-            <p>Czas trwania: {{ flight.duration }}</p>
-            
-            <h4>Trasa lotu:</h4>
-            <ul>
-              <li *ngFor="let route of flight.fullRoute">
-                {{ route.from }} -> {{ route.to }} ({{ route.duration }})
-                <span *ngIf="route.stopover"> - Przesiadka w {{ route.stopover }}</span>
-              </li>
-            </ul>
-          </div>
+            <!-- Czas trwania i trasa lotu -->
+            <div class="flight-details">
+              <p>Flight route</p>
+              <ul>
+                <li *ngFor="let route of flight.fullRoute">
+                  {{ route.from }} -> {{ route.to }} ({{formatDuration(route.duration) }})
+                  <span *ngIf="route.stopover"> - transfer in {{ route.stopover }}</span>
+                </li>
+              </ul>
+            </div>
     
         </div>
       </div>
     </div>
-    
-    <div *ngIf="!searchResults" class="card">
-      <div class="card-title">Brak wyników wyszukiwania</div>
+    </div>
+    <div *ngIf="!searchResults" class="card2" >
+      <div class="card2-title">No search results </div>
     </div> 
+    
     
       
 
 
 
      
+     
+    
+
+
+
+     
+    
+
+
+    
+    
     
 
 

@@ -11,6 +11,7 @@ import { ResultsFlightsComponent } from './flights/results-flights/results-fligh
 
 
 import { AirConnectionComponent } from './flights/air-connection/air-connection.component';
+import { AirConnectionReturnComponent } from './flights/air-connection-return/air-connection-return.component';
 
 
 
@@ -21,6 +22,7 @@ import { AirConnectionComponent } from './flights/air-connection/air-connection.
     SearchComponent,
     ResultsFlightsComponent,
     AirConnectionComponent,
+    AirConnectionReturnComponent,
    
     
   ],
