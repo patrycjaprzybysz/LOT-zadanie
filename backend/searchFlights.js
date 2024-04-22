@@ -57,10 +57,10 @@ function formatFlightData(response) {
 }
 
 const cityToAirport = {
-  'new York': 'JFK',
-  'los Angeles': 'LAX',
+  'new york': 'JFK',
+  'los angeles': 'LAX',
   'chicago': 'ORD',
-  'san Francisco': 'SFO',
+  'san francisco': 'SFO',
   'london': 'LHR',
   'paris': 'CDG',
   'frankfurt': 'FRA',
@@ -102,9 +102,9 @@ const cityToAirport = {
   'marseille': 'MRS',
   'luxembourg': 'LUX',
   'moscow': 'SVO',
-  'saint Petersburg': 'LED',
+  'saint petersburg': 'LED',
   'birmingham': 'BHX',
-  'brussels Charleroi': 'CRL',
+  'brussels charleroi': 'CRL',
   'lyon': 'LYS',
   'porto': 'OPO',
   'mykonos': 'JMK',
