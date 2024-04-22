@@ -1,3 +1,4 @@
+export default async() => {
 const express = require('express');
 const Amadeus = require('amadeus');
 const morgan = require('morgan');
@@ -219,4 +220,4 @@ let response2;
 
 app.listen(port, () => {
   console.log(`Serwer działa na http://localhost:${port}`);
-});
+});}
