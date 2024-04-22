@@ -13,6 +13,7 @@ const corsMiddleware = cors();
 const jsonMiddleware = require('body-parser').json();
 const urlEncodedMiddleware = require('body-parser').urlencoded({ extended: true });
 
+
 function formatFlightData(response) {
   const formattedData = response.data.map(flight => {
       const itinerary = flight.itineraries[0];

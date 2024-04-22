@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css', ],
 })
+
+
+
 export class SearchComponent {
 
   searchForm: FormGroup;
@@ -18,7 +21,9 @@ export class SearchComponent {
   isOneWay: boolean = true;
 
   showOneWay: boolean = true;
-showTwoWays: boolean = false;
+   showTwoWays: boolean = false;
+  
+
 
 
 
@@ -61,15 +66,37 @@ showTwoWays: boolean = false;
 
   if (departureDate && returnDate && returnDate < departureDate) {
     alert('Its a plane, not a time machine ;)');
-    return; // Zatrzymaj dalsze przetwarzanie formularza
+    return; 
   }
+
+  let regex = /^[a-zA-Z]+$/
+
+  if (!regex.test(this.searchForm.get('from')?.value) ) {
+    alert('Departure city is not valid');
+    return; 
+  }
+
+  if (!regex.test(this.searchForm.get('to')?.value) ) {
+    alert('Arrival city is not valid');
+    return; 
+  }
+
+  if (this.searchForm.get('adults')?.value>9)  {
+    alert('Not too much passengers? ;)');
+    return; 
+  }else if(this.searchForm.get('adults')?.value<=0){
+    alert('Do you wanna go or not? Please add passengers ;)');
+    return;
+  }
+
+
     if (this.searchForm.valid) {
       const formData = this.searchForm.value;
 
      
       const backendUrl = 'https://lot-task.netlify.app/.netlify/functions'; // adres URL
 
-      const fullUrl = `${backendUrl}/searchFlights?originLocationCode=${formData.from}&destinationLocationCode=${formData.to}&departureDate=${formData.departureDate}&adults=${formData.adults}&returnDate=${formData.returnDate}`;
+      const fullUrl = `${backendUrl}/searchFlights?originLocationCode=${formData.from.toLowerCase()}&destinationLocationCode=${formData.to.toLowerCase()}&departureDate=${formData.departureDate}&adults=${formData.adults}&returnDate=${formData.returnDate}`;
 
       this.http.get<any>(fullUrl).subscribe(
         data => {
