@@ -1,27 +1,12 @@
-# FlightSearch
+# Wyszukiwarka lotów
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+Projekt rekrutacyjny polegający na stworzeniu zaawansowanej wyszukiwarki lotów. Wykorzystałem najnowszą wersję frameworka Angular (Angular 17), aby zapewnić interaktywny i responsywny interfejs użytkownika. Aby dostarczyć aktualne i dokładne informacje o lotach, zintegrowałem się z Amadeus API, które umożliwia wyszukiwanie połączeń lotniczych.
 
-## Development server
+Dodatkowo, w celu efektywnego przetwarzania zapytań i optymalizacji wydajności, wykorzystałem backend oparty na technologii Node.js. Dzięki temu zapewniłem płynność działania aplikacji oraz szybkie odpowiedzi na zapytania użytkowników. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+link do strony: `https://lot-task.netlify.app/`
 
-## Code scaffolding
+![image](https://github.com/patrycjaprzybysz/LOT-zadanie/assets/100605325/9b0048b0-0c8f-4db7-9f3d-38d02ed3e24c)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
