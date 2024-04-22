@@ -131,14 +131,7 @@ const cityToAirport = {
 exports.handler = async (event) => {
   const { httpMethod, queryStringParameters, body } = event;
   console.log(httpMethod, event.path, queryStringParameters, body);
-  if (httpMethod === 'GET' && event.path === '/') {
-    return {
-      statusCode: 200,
-      body: 'Serwer działa',
-    };
-  }
-
-  if (httpMethod === 'GET' && event.path === '/searchFlights') {
+  
     const searchData = queryStringParameters;
 
     const fromAirport = cityToAirport[searchData.originLocationCode];
@@ -205,7 +198,6 @@ exports.handler = async (event) => {
         body: JSON.stringify({ message: 'Wystąpił błąd podczas wyszukiwania lotów', errorMes: error.message }),
       };
     }
-  }
 
   return {
     statusCode: 404,
