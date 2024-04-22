@@ -130,7 +130,7 @@ const cityToAirport = {
 
 exports.handler = async (event) => {
   const { httpMethod, queryStringParameters, body } = event;
-
+  console.log(httpMethod, event.path, queryStringParameters, body);
   if (httpMethod === 'GET' && event.path === '/') {
     return {
       statusCode: 200,
