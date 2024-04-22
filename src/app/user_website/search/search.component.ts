@@ -35,6 +35,16 @@ export class SearchComponent {
     return '';
   }
 
+  minDate(): string {
+    const today = new Date();
+    // Formatowanie daty do formatu YYYY-MM-DD
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+
 
   
   
@@ -102,13 +112,21 @@ export class SearchComponent {
 
       const fullUrl = `${backendUrl}/searchFlights?originLocationCode=${formData.from.toLowerCase()}&destinationLocationCode=${formData.to.toLowerCase()}&departureDate=${formData.departureDate}&adults=${formData.adults}&returnDate=${formData.returnDate}`;
 
+      const minDelay = 3000;
+      const startTime = Date.now();
+
       this.http.get<any>(fullUrl).subscribe(
         data => {
           console.log(data);
           this.searchResultsData = data;
           this.searchError = ''; // Wyczyszczenie błędu po udanym pobraniu danych
           this.formData = formData;
-          this.isLoading = false;
+          // this.isLoading = false;
+
+          const actualDelay = Math.max(minDelay - (Date.now() - startTime), 0);
+          setTimeout(() => {
+            this.isLoading = false; // Ustawienie isLoading na false po upływie faktycznego czasu ładowania
+          }, actualDelay);
         },
         error => {
           console.error('Błąd podczas wyszukiwania lotów:', error);

@@ -176,13 +176,13 @@
             <div class="input-container">
                 <label>
                     Departure:
-                    <input type="date" formControlName="departureDate" />
+                    <input type="date" formControlName="departureDate" [min]="minDate()" />
                 </label>
             </div>
             <div class="input-container" *ngIf="searchForm.get('oneWay')?.value === 'false'">
                 <label>
                     Return:
-                    <input type="date" formControlName="returnDate" />
+                    <input type="date" formControlName="returnDate" [min]="minDate()" />
                 </label>
             </div>
             <div class="input-container">
